@@ -20,7 +20,7 @@
 
 echo "###########正在初始化环境#########"
 #getip=192.168.1.100
-getip=`ip add | grep -w inet | grep -v "127.0.0.1"| awk -F '[ /]+' '{print $3}'`
+getip=`ip add | grep -w inet | grep -v "127.0.0.1"| awk -F '[ /]+' '{print $3}'|head -1` #IP结果唯一
 
 #开启alias功能
 shopt -s expand_aliases
@@ -40,10 +40,14 @@ if [ "$a" \< "7.0" ];then
 fi
 
 yum install -y curl wget
+echo "timeout=120" >> /etc/yum.conf
 wget -O /etc/yum.repos.d/CentOS-7.repo http://mirrors.aliyun.com/repo/Centos-7.repo
 yum clean all
 yum makecache
-yum install -y ntpdate epel-release python-devel git net-tools
+yum install -y ntpdate python-devel git net-tools
+wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+yum clean all
+yum makecache
 
 echo "#############正在关闭SELINUX#########"
 setenforce 0
@@ -140,7 +144,7 @@ function NGINX() {
 netstat -anput | grep nginx > /dev/null
 if [ $? = '1' ]; then
 	echo "######install nginx########"
-	rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+	rpm -ivh http://mirrors.ustc.edu.cn/nginx/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
     yum install -y nginx
 else
 	echo "######nginx is installed########"
