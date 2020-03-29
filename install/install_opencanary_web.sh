@@ -81,7 +81,7 @@ if [ ! -s $PIP_FILE ]; then
     index-url = https://mirrors.huaweicloud.com/repository/pypi/simple
     trusted-host = mirrors.huaweicloud.com
     timeout = 120
-    EOF
+EOF
     python -m pip install --upgrade pip
     echo "################pip is installed############"
     else
