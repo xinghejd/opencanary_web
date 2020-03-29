@@ -40,7 +40,8 @@ if [ "$a" \< "7.0" ];then
 fi
 
 yum install -y curl wget
-wget -O /etc/yum.repos.d/CentOS-7.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+#wget -O /etc/yum.repos.d/CentOS-7.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.huaweicloud.com/repository/conf/CentOS-7-anon.repo
 yum clean all
 yum makecache
 yum install -y ntpdate epel-release python-devel git net-tools
