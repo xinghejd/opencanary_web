@@ -75,6 +75,13 @@ fi
 PIP_FILE=/usr/bin/pip
 if [ ! -s $PIP_FILE ]; then
     curl https://bootstrap.pypa.io/get-pip.py | python
+    mkdir ~/.pip/
+    cat > ~/.pip/pip.conf <<EOF
+    [global]
+    index-url = https://mirrors.huaweicloud.com/repository/pypi/simple
+    trusted-host = mirrors.huaweicloud.com
+    timeout = 120
+    EOF
     python -m pip install --upgrade pip
     echo "################pip is installed############"
     else
